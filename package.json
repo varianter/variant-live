@@ -8,7 +8,9 @@
     "monaco-editor": "^0.15.6",
     "p5": "^0.7.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "parcel-bundler": "^1.10.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel sandbox/sandbox.html"
