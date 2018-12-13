@@ -110,6 +110,9 @@ export default function editor(value, el) {
   return monaco.editor.create(el, {
     value,
     language: "javascript",
-    theme: "vs-dark"
+    theme: "vs-dark",
+    minimap: {
+      enabled: false
+    }
   });
 }

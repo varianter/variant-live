@@ -5,7 +5,11 @@
   "main": "index.js",
   "dependencies": {
     "@babel/standalone": "^7.2.0",
+    "assets": "^3.0.0",
+    "autoprefixer": "^9.4.2",
+    "install": "^0.12.2",
     "monaco-editor": "^0.15.6",
+    "npm": "^6.5.0",
     "p5": "^0.7.2"
   },
   "devDependencies": {

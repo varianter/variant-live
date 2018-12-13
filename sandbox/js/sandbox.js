@@ -1,17 +1,20 @@
 import { transform } from "@babel/standalone";
 import p5 from "p5";
+import fs from "fs";
+
 import "p5/lib/addons/p5.sound";
 import "p5/lib/addons/p5.dom";
-import editor from "./editor";
 
-import visuals1 from "./visuals/1";
+import editor from "./editor";
+import createMusic from "./audio-player";
+
+const example = fs.readFileSync(__dirname + "/example.template").toString();
 
 var colorPalette = ["#000", "#03dac6", "#6200ee", "#ff0166", "#728d0d"];
 
 let render = () => {};
-let defaultText = visuals1.toString();
-let editorBox = editor(defaultText, document.getElementById("editor"));
-getSourceCode(editorBox, defaultText, function replaceSource(fn) {
+let editorBox = editor(example, document.getElementById("editor"));
+getSourceCode(editorBox, example, function replaceSource(fn) {
   render = fn;
 });
 
@@ -20,16 +23,20 @@ function env(p) {
     return [p.windowWidth, p.windowHeight];
   }
 
-  let mic, fft, analyzer;
+  let mic, fft, analyzer, music;
+
+  p.preload = () => {
+    music = createMusic(p5);
+  };
 
   p.setup = () => {
     p.createCanvas(...getDimensions().concat(p.WEBGL));
 
-    mic = new p5.AudioIn();
-    mic.start();
+    // mic = new p5.AudioIn();
+    // mic.start();
 
     fft = new p5.FFT();
-    fft.setInput(mic);
+    fft.setInput(music);
 
     analyzer = new p5.Amplitude();
   };
@@ -65,12 +72,10 @@ function getSourceCode(editor, defaultCode, callback) {
 
 function compile(src) {
   try {
-    const res = transform(
-      `window.__innerFunc = function __innerFunc() { 'use strict'; return ${src}; }`,
-      {
-        presets: ["es2015"]
-      }
-    );
+    const res = transform(`window.__innerFunc = function __innerFunc() { 'use strict'; ${src} }`, {
+      presets: ["es2015"]
+    });
+    console.log(res.code);
     eval(res.code);
 
     return __innerFunc();
@@ -80,7 +85,7 @@ function compile(src) {
 }
 
 function removeExport(src) {
-  let res = src.replace(/^\s*export default/, "");
+  let res = src.replace(/^export default/gm, "return ");
   return res;
 }
 
