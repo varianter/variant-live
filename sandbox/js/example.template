@@ -16,8 +16,8 @@ export default function draw(p5, { bass, treble, mid, amplitude }) {
   let mapTreble = p5.map(treble, 0, 255, -radius, radius);
   let scaleTreble = p5.map(treble, 0, 255, 1, 1.5);
 
-  let mapbass = p5.map(bass, 0, 255, -100, 800);
-  let scalebass = p5.map(bass, 0, 255, 0, 0.8);
+  let mapBass = p5.map(bass, 0, 255, -100, 800);
+  let scaleBass = p5.map(bass, 0, 255, 0, 0.8);
 
   pieces = mapMouseX;
   radius = mapMouseY;
@@ -31,10 +31,10 @@ export default function draw(p5, { bass, treble, mid, amplitude }) {
     p5.push();
     p5.strokeWeight(5);
     p5.stroke("#03dac6");
-    p5.scale(scalebass);
+    p5.scale(scaleBass);
     p5.rotate(p5.frameCount * -0.5);
-    p5.line(mapbass, radius / 2, 0, radius, radius, 0);
-    p5.line(-mapbass, -radius / 2, 0, radius, radius, 0);
+    p5.line(mapBass, radius / 2, 0, radius, radius, 0);
+    p5.line(-mapBass, -radius / 2, 0, radius, radius, 0);
     p5.pop();
 
     /*----------  MID  ----------*/
