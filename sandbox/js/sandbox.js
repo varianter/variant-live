@@ -6,7 +6,7 @@ import "p5/lib/addons/p5.dom";
 
 import editor from "./editor";
 import createMusic from "./audio-player";
-import { renderText } from "monaco-editor/esm/vs/base/browser/htmlContentRenderer";
+import createAddLink from "./add-link";
 
 import ibmFont from "../assets/IBMPlexMono-Bold.ttf";
 
@@ -15,8 +15,11 @@ const example = fs.readFileSync(__dirname + "/example.template").toString();
 let render = () => {};
 let metadata = {};
 const editorContainer = document.getElementById("editor");
+const updateLink = createAddLink(editorContainer.parentElement);
+
 editor(example, editorContainer, function replaceSource(error, fn, attribution, src) {
   if (error) return console.error(error);
+  updateLink(src);
 
   render = fn;
   metadata = attribution;
