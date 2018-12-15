@@ -28,18 +28,24 @@ function getSourceCode(editor, defaultCode, callback) {
 }
 
 function compile(src, cb) {
+  let res;
   try {
     save(src);
     const cleaned = addWindowWrapping(saveMetadata(removeExport(src)));
-    const res = transform(cleaned, {
+    res = transform(cleaned, {
       presets: ["es2015"]
     });
-
-    eval(res.code);
-    cb(null, __innerFunc(), src);
   } catch (ex) {
-    cb(ex);
+    return cb(ex);
   }
+
+  try {
+    eval(res.code);
+  } catch (ex) {
+    return cb(ex);
+  }
+
+  cb(null, __innerFunc(), window.__metadata || {}, src);
 }
 
 function addWindowWrapping(src) {

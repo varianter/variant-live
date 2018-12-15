@@ -112,6 +112,7 @@ export default function editor(el) {
     theme: "vs-dark",
     automaticLayout: true,
     fontSize: 16,
+    tabSize: 2,
     minimap: {
       enabled: false
     }
