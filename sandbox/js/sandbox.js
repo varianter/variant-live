@@ -75,7 +75,6 @@ function compile(src) {
     const res = transform(`window.__innerFunc = function __innerFunc() { 'use strict'; ${src} }`, {
       presets: ["es2015"]
     });
-    console.log(res.code);
     eval(res.code);
 
     return __innerFunc();

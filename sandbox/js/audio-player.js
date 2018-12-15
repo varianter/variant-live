@@ -11,12 +11,18 @@ export default function createMusic(p5) {
     progress.value = 0;
   });
 
+  function checkPlayState() {
+    if (sound.isPlaying()) {
+      play.textContent = "❙❙";
+    } else {
+      play.textContent = "▶";
+    }
+  }
+
   play.addEventListener("click", function() {
     if (sound.isPlaying()) {
-      play.textContent = "▶";
       sound.pause();
     } else {
-      play.textContent = "❙❙";
       sound.loop();
     }
   });
@@ -25,10 +31,27 @@ export default function createMusic(p5) {
     if (sound.isPlaying()) {
       progress.value = sound.currentTime();
     }
-  }, 500);
+    checkPlayState();
+  }, 200);
 
   restart.addEventListener("click", function() {
-    sound.jump();
+    if (!sound.isPlaying()) {
+      sound.stop();
+      progress.value = 0;
+    } else {
+      sound.jump(0);
+    }
+  });
+
+  progress.addEventListener("click", function(e) {
+    let x = e.pageX - progress.offsetLeft;
+    let clickedValue = (x * progress.max) / progress.offsetWidth;
+    let isClicked = clickedValue <= progress.max && clickedValue >= 0;
+
+    if (isClicked) {
+      sound.jump(clickedValue);
+      progress.value = clickedValue;
+    }
   });
 
   return sound;
