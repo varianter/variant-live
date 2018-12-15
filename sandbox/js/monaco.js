@@ -45,8 +45,8 @@ import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 
 // (2) Desired languages:
 // import 'monaco-editor/esm/vs/language/css/monaco.contribution';
-import "monaco-editor/esm/vs/language/json/monaco.contribution";
-import "monaco-editor/esm/vs/language/html/monaco.contribution";
+// import "monaco-editor/esm/vs/language/json/monaco.contribution";
+// import "monaco-editor/esm/vs/language/html/monaco.contribution";
 // import 'monaco-editor/esm/vs/basic-languages/bat/bat.contribution.js';
 // import 'monaco-editor/esm/vs/basic-languages/coffee/coffee.contribution.js';
 // import 'monaco-editor/esm/vs/basic-languages/cpp/cpp.contribution.js';
@@ -90,19 +90,10 @@ import "monaco-editor/esm/vs/basic-languages/typescript/typescript.contribution"
 
 self.MonacoEnvironment = {
   getWorker: function(moduleId, label) {
-    if (label === "json") {
-      return new Worker("../../node_modules/monaco-editor/esm/vs/language/json/json.worker.js");
-    }
-    if (label === "css") {
-      return new Worker("../../node_modules/monaco-editor/esm/vs/language/css/css.worker.js");
-    }
-    if (label === "html") {
-      return new Worker("../../node_modules/monaco-editor/esm/vs/language/html/html.worker.js");
-    }
     if (label === "typescript" || label === "javascript") {
-      return new Worker("../../node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js");
+      return new Worker("../node_modules/monaco-editor/esm/vs/language/typescript/ts.worker.js");
     }
-    return new Worker("../../node_modules/monaco-editor/esm/vs/editor/editor.worker.js");
+    return new Worker("../node_modules/monaco-editor/esm/vs/editor/editor.worker.js");
   }
 };
 

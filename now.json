@@ -1,0 +1,12 @@
+{
+  "name": "variant-nyttarskalas-2019",
+  "version": 2,
+  "builds": [
+    {
+      "src": "sandbox/package.json",
+      "use": "@now/static-build",
+      "config": { "maxLambdaSize": "20mb" }
+    },
+    { "src": "index.html", "use": "@now/static" }
+  ]
+}

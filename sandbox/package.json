@@ -1,13 +1,20 @@
 {
-  "name": "variant-vjay",
+  "name": "variant-vjay-sandbox",
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "@babel/standalone": "^7.2.0",
+    "autoprefixer": "^9.4.2",
+    "monaco-editor": "^0.15.6",
+    "p5": "^0.7.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.10.3"
+  },
   "scripts": {
-    "deploy": "now",
-    "start": "parcel sandbox/sandbox.html"
+    "start": "parcel index.html",
+    "now-build": "parcel build index.html --no-source-maps --public-url /sandbox"
   },
   "repository": {
     "type": "git",
