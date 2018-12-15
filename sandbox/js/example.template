@@ -1,7 +1,7 @@
-// export const Metadata = {
-//   creators: ["Marius Krakeli"],
-//   url: "http://variant.no"
-// };
+export const Metadata = {
+  creators: ["Marius Krakeli"],
+  url: "http://variant.no"
+};
 
 export default function draw(p5, { bass, treble, mid, amplitude }) {
   let pieces = 0;
