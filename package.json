@@ -6,8 +6,7 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "deploy": "now",
-    "start": "parcel sandbox/sandbox.html"
+    "deploy": "now --team variant && now alias --team variant && now rm variant-nyttarskalas-2019 --safe --yes --team variant"
   },
   "repository": {
     "type": "git",

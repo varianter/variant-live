@@ -1,12 +1,17 @@
 {
   "name": "variant-nyttarskalas-2019",
   "version": 2,
+  "alias": "variant.live",
   "builds": [
     {
       "src": "sandbox/package.json",
       "use": "@now/static-build",
       "config": { "maxLambdaSize": "20mb" }
     },
-    { "src": "index.html", "use": "@now/static" }
-  ]
+    {
+      "src": "landingpage/package.json",
+      "use": "@now/static-build"
+    }
+  ],
+  "routes": [{ "src": "/", "dest": "/landingpage" }]
 }
