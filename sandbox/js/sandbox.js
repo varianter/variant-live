@@ -6,7 +6,7 @@ import "p5/lib/addons/p5.dom";
 
 import editor from "./editor";
 import createMusic from "./audio-player";
-import createAddLink from "./add-link";
+import createAddLink, { createCopyLink } from "./add-link";
 
 import ibmFont from "../assets/IBMPlexMono-Bold.ttf";
 

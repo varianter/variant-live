@@ -8,6 +8,16 @@ function getSaved() {
   return localStorage.getItem("editorContent");
 }
 
+function getQueryData() {
+  let urlParams = new URLSearchParams(window.location.search);
+  if (!urlParams.has("content")) return "";
+  return decodeURIComponent(urlParams.get("content"));
+}
+
+function valueSet(val) {
+  return val && val !== null && val.trim();
+}
+
 export default function liveEditor(defaultSrc, el, cb) {
   getSourceCode(monaco(el), defaultSrc, cb);
 }
@@ -18,12 +28,17 @@ function getSourceCode(editor, defaultCode, callback) {
   editor.onDidChangeModelContent(debounce(() => process(editor.getValue())));
 
   const saved = getSaved();
-  if (!saved || !saved.trim()) {
-    editor.setValue(defaultCode);
-    process(defaultCode);
-  } else {
+  const param = getQueryData();
+
+  if (valueSet(param)) {
+    editor.setValue(param);
+    process(param);
+  } else if (valueSet(saved)) {
     editor.setValue(saved);
     process(saved);
+  } else {
+    editor.setValue(defaultCode);
+    process(defaultCode);
   }
 }
 
