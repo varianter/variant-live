@@ -1,6 +1,6 @@
 export const Metadata = {
-  creators: ['Marius Krakeli'],
-  url: 'https://www.variant.no'
+  creators: ["Marius Krakeli"],
+  url: "https://www.variant.no"
 };
 
 export default function draw(p5, { bass, treble, mid, amplitude }) {
@@ -27,7 +27,7 @@ export default function draw(p5, { bass, treble, mid, amplitude }) {
     /*----------  BASS  ----------*/
     p5.push();
     p5.strokeWeight(1);
-    p5.stroke('#6200ee');
+    p5.stroke("#6200ee");
     p5.scale(scalebass);
     p5.rotate(p5.frameCount * -0.5);
     p5.line(mapbass, radius / 2, radius, radius);
@@ -37,13 +37,13 @@ export default function draw(p5, { bass, treble, mid, amplitude }) {
     /*----------  MID  ----------*/
     p5.push();
     p5.strokeWeight(1);
-    p5.stroke('#ff0166');
+    p5.stroke("#ff0166");
     p5.line(mapMid, radius, radius * 2, radius * 2);
     p5.pop();
 
     /*----------  TREBLE  ----------*/
     p5.push();
-    p5.stroke('#03dac6');
+    p5.stroke("#03dac6");
     p5.scale(scaleTreble);
     p5.line(mapTreble, radius / 2, radius, radius);
     p5.pop();
