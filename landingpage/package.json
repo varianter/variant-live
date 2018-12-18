@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "parcel-bundler": "^1.10.3"
+    "cssnano": "^4.1.7",
+    "parcel-bundler": "^1.11.0"
   },
   "dependencies": {
     "autoprefixer": "^9.4.3",
