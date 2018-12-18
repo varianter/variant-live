@@ -11,6 +11,10 @@
     {
       "src": "landingpage/package.json",
       "use": "@now/static-build"
+    },
+    {
+      "src": "previewer/package.json",
+      "use": "@now/static-build"
     }
   ],
   "routes": [{ "src": "/", "dest": "/landingpage" }]
