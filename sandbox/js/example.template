@@ -41,7 +41,7 @@ export default function draw(p5, { bass, treble, mid, amplitude }) {
     p5.line(-mapMid, -radius / 2, 0, radius, radius, 0);
     p5.pop();
 
-    /*----------  TREMBLE  ----------*/
+    /*----------  TREBLE  ----------*/
     p5.push();
     p5.stroke("#03dac6");
     p5.scale(scaleTreble);
