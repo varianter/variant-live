@@ -1,13 +1,13 @@
-import createP5Env from '../../common/p5-env';
-import fs from 'fs';
+import createP5Env from "../../common/p5-env";
+import fs from "fs";
 
-import createMusic from './audio-player';
-import createAddLink from './add-link';
-import editor from './editor';
+import createMusic from "./audio-player";
+import createAddLink from "./add-link";
+import editor from "./editor";
 
-const example = fs.readFileSync(__dirname + '/example.template').toString();
+const example = fs.readFileSync(__dirname + "/example.template").toString();
 
-const editorContainer = document.getElementById('editor');
+const editorContainer = document.getElementById("editor");
 const updateLink = createAddLink(editorContainer.parentElement);
 
 const opts = {
@@ -19,7 +19,7 @@ const opts = {
 const { updateValues } = createP5Env(
   opts,
   {},
-  document.getElementById('canvas')
+  document.getElementById("canvas")
 );
 
 editor(example, editorContainer, function replaceSource(
