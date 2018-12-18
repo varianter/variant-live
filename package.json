@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "dependencies": {},
+  "dependencies": {
+    "p5": "^0.7.2"
+  },
   "devDependencies": {},
   "scripts": {
     "deploy": "now --team variant && now alias --team variant && now rm variant-nyttarskalas-2019 --safe --yes --team variant"

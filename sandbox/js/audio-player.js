@@ -1,25 +1,25 @@
-import file from "../assets/music.mp3";
+import file from '../../assets/music.mp3';
 
-const play = document.querySelector("#play");
-const restart = document.querySelector("#restart");
-const progress = document.querySelector("#progress");
+const play = document.querySelector('#play');
+const restart = document.querySelector('#restart');
+const progress = document.querySelector('#progress');
 
 let sound;
 export default function createMusic(p5) {
   sound = new p5.SoundFile(file, function loaded() {
-    progress.setAttribute("max", sound.duration());
+    progress.setAttribute('max', sound.duration());
     progress.value = 0;
   });
 
   function checkPlayState() {
     if (sound.isPlaying()) {
-      play.textContent = "❙❙";
+      play.textContent = '❙❙';
     } else {
-      play.textContent = "▶";
+      play.textContent = '▶';
     }
   }
 
-  play.addEventListener("click", function() {
+  play.addEventListener('click', function() {
     if (sound.isPlaying()) {
       sound.pause();
     } else {
@@ -34,7 +34,7 @@ export default function createMusic(p5) {
     checkPlayState();
   }, 200);
 
-  restart.addEventListener("click", function() {
+  restart.addEventListener('click', function() {
     if (!sound.isPlaying()) {
       sound.stop();
       progress.value = 0;
@@ -43,7 +43,7 @@ export default function createMusic(p5) {
     }
   });
 
-  progress.addEventListener("click", function(e) {
+  progress.addEventListener('click', function(e) {
     let x = e.pageX - progress.offsetLeft;
     let clickedValue = (x * progress.max) / progress.offsetWidth;
     let isClicked = clickedValue <= progress.max && clickedValue >= 0;
