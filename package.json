@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Krakels/variant-vjay.git"
+    "url": "git+https://github.com/varianter/variant-live.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Krakels/variant-vjay/issues"
+    "url": "https://github.com/varianter/variant-live/issues"
   },
-  "homepage": "https://github.com/Krakels/variant-vjay#readme"
+  "homepage": "https://github.com/varianter/variant-live#readme"
 }

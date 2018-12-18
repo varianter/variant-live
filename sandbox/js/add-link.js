@@ -1,5 +1,5 @@
 const baseLink =
-  "https://github.com/Krakels/variant-vjay/new/master/sandbox/js/visuals?filename=99.js";
+  "https://github.com/varianter/variant-live/new/master/sandbox/js/visuals?filename=99.js";
 
 export default function(container) {
   const div = document.createElement("div");
