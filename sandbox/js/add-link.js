@@ -1,4 +1,4 @@
-const baseLink = "https://github.com/varianter/variant-live/tree/master/visuals/";
+const baseLink = "https://github.com/varianter/variant-live/new/master/visuals/";
 
 export default function(container) {
   const div = document.createElement("div");
