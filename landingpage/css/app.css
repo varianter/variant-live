@@ -1,4 +1,4 @@
-@import '../../common/base.css';
+@import "../../common/base.css";
 
 body {
   color: #33333d;
@@ -30,6 +30,15 @@ body {
   overflow: auto;
 }
 
+@media (max-width: 400px) {
+  .canvas {
+    display: none;
+  }
+  .main {
+    width: 100%;
+  }
+}
+
 .logo {
   margin-bottom: 3rem;
 }
@@ -54,7 +63,7 @@ body {
   font-size: 2rem;
   font-weight: 500;
   border: 0;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   text-decoration: none;
   cursor: pointer;
 
