@@ -3,7 +3,7 @@ export const Metadata = {
   url: "https://www.variant.no"
 };
 
-export default function draw(p5, { bass, treble, mid, amplitude }) {
+export default function draw(p5, { bass, treble, mid, level }) {
   p5.randomSeed(250);
   let pieces = p5.random(0, 24);
   let radius = p5.random(0, 600);
