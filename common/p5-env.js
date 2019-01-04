@@ -1,31 +1,40 @@
-import p5 from './p5';
+import p5 from "./p5";
 
-import ibmFont from '../assets/IBMPlexMono-Bold.ttf';
+import ibmFont from "../assets/IBMPlexMono-Bold.ttf";
 
 const noop = () => {};
 
-export default function createEnv(
-  { preload = noop, setup = noop, render = noop },
-  metadata,
-  el
-) {
+export default function createEnv({ preload = noop, setup = noop, render = noop }, metadata, el) {
   let p5Instance = new p5(env, el);
+  let preloadHook = noop;
+  let setupHook = noop;
 
   return {
-    updateValues({ render: innerRender = noop, metadata: innerMetadata = {} }) {
+    updateValues(opts) {
+      const {
+        render: innerRender = noop,
+        metadata: innerMetadata = {},
+        preloadHook: preloadHookInner = noop,
+        setupHook: setupHookInner = noop
+      } = opts;
+
       render = innerRender;
       metadata = innerMetadata;
+      preloadHook = preloadHookInner;
+      setupHook = setupHookInner;
     },
     p5Instance
   };
 
   function env(p) {
     let fft, analyzer, source, myFont;
+    let preloadResult;
 
     p.preload = () => {
       myFont = p.loadFont(ibmFont);
 
       source = preload(p, p5);
+      preloadResult = preloadHook(p, p5);
     };
 
     p.setup = () => {
@@ -36,6 +45,12 @@ export default function createEnv(
 
       analyzer = new p5.Amplitude();
 
+      setupHook(p, preloadResult, {
+        fft,
+        analyzer,
+        p5
+      });
+
       setup(p);
     };
 
@@ -44,7 +59,7 @@ export default function createEnv(
     };
 
     p.draw = () => {
-      p.background('#000');
+      p.background("#000");
       p.textFont(myFont);
       p.noFill();
       fft.analyze();
@@ -52,10 +67,11 @@ export default function createEnv(
       try {
         p.push();
         render(p, {
-          bass: fft.getEnergy('bass'),
-          treble: fft.getEnergy('treble'),
-          mid: fft.getEnergy('mid'),
-          level: analyzer.getLevel()
+          bass: fft.getEnergy("bass"),
+          treble: fft.getEnergy("treble"),
+          mid: fft.getEnergy("mid"),
+          level: analyzer.getLevel(),
+          p5
         });
         p.pop();
 
@@ -66,14 +82,13 @@ export default function createEnv(
     };
 
     function renderAttribution(p) {
-      if (!metadata || !metadata.creators || !Array.isArray(metadata.creators))
-        return;
+      if (!metadata || !metadata.creators || !Array.isArray(metadata.creators)) return;
 
       p.push();
       p.translate(-p.windowWidth / 2, p.windowHeight / 2 - 80);
       p.textSize(40);
-      p.fill('#fff');
-      p.text(metadata.creators.join(' & '), 20, 0);
+      p.fill("#fff");
+      p.text(metadata.creators.join(" & "), 20, 0);
 
       if (metadata.url) {
         p.textSize(26);

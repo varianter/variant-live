@@ -1,6 +1,8 @@
 import { transform } from "@babel/standalone";
 import monaco from "./monaco";
 
+let noop = () => {};
+
 function save(src) {
   localStorage.setItem("editorContent", src);
 }
@@ -46,7 +48,14 @@ function compile(src, cb) {
   let res;
   try {
     save(src);
-    const cleaned = addWindowWrapping(saveMetadata(removeExport(src)));
+    const caller = compose(
+      addWindowWrapping,
+      saveMetadata,
+      savePreload,
+      saveSetup,
+      removeExport
+    );
+    const cleaned = caller(src);
     res = transform(cleaned, {
       presets: ["es2015"]
     });
@@ -60,7 +69,14 @@ function compile(src, cb) {
     return cb(ex);
   }
 
-  cb(null, __innerFunc(), window.__metadata || {}, src);
+  cb(
+    null,
+    __innerFunc(),
+    window.__metadata || {},
+    window.__preload || noop,
+    window.__setup || noop,
+    src
+  );
 }
 
 function addWindowWrapping(src) {
@@ -77,6 +93,16 @@ function saveMetadata(src) {
   return res;
 }
 
+function savePreload(src) {
+  let res = src.replace(/^\s*export function preload /gm, "window.__preload = function preload");
+  return res;
+}
+
+function saveSetup(src) {
+  let res = src.replace(/^\s*export function setup /gm, "window.__setup = function setup");
+  return res;
+}
+
 function debounce(func, delay = 1000) {
   let inDebounce;
   return function() {
@@ -84,5 +110,13 @@ function debounce(func, delay = 1000) {
     const args = arguments;
     clearTimeout(inDebounce);
     inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+}
+
+function compose(...fns) {
+  return function innerComposed(arg) {
+    return fns.reduceRight(function(val, fn) {
+      return fn(val);
+    }, arg);
   };
 }

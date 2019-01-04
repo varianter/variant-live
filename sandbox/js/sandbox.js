@@ -16,16 +16,14 @@ const opts = {
   }
 };
 
-const { updateValues } = createP5Env(
-  opts,
-  {},
-  document.getElementById("canvas")
-);
+const { updateValues } = createP5Env(opts, {}, document.getElementById("canvas"));
 
 editor(example, editorContainer, function replaceSource(
   error,
   fn,
   attribution,
+  preload,
+  setup,
   src
 ) {
   if (error) {
@@ -35,6 +33,8 @@ editor(example, editorContainer, function replaceSource(
   updateLink(src);
   updateValues({
     render: fn,
-    metadata: attribution
+    metadata: attribution,
+    preloadHook: preload,
+    setupHook: setup
   });
 });
