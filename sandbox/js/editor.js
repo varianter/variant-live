@@ -94,12 +94,18 @@ function saveMetadata(src) {
 }
 
 function savePreload(src) {
-  let res = src.replace(/^\s*export function preload /gm, "window.__preload = function preload");
+  let res = src.replace(
+    /^\s*export function preload\s*/gm,
+    "window.__preload = function preload"
+  );
   return res;
 }
 
 function saveSetup(src) {
-  let res = src.replace(/^\s*export function setup /gm, "window.__setup = function setup");
+  let res = src.replace(
+    /^\s*export function setup\s*/gm,
+    "window.__setup = function setup"
+  );
   return res;
 }
 
