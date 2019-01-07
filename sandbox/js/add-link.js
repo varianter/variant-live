@@ -1,4 +1,4 @@
-const baseLink = "https://github.com/varianter/variant-live/new/master/visuals/";
+const baseLink = "https://github.com/varianter/variant-live/new/master/";
 
 export default function(container) {
   const div = document.createElement("div");
@@ -46,7 +46,10 @@ function createUrl(src) {
   const randomName = Math.random()
     .toString(36)
     .substring(7);
-  return baseLink + `?filename=${randomName}.js&value=${encodeURIComponent(src)}`;
+  return (
+    baseLink +
+    `?filename=visuals/${randomName}.js&value=${encodeURIComponent(src)}`
+  );
 }
 
 function createCopyUrl(src) {
