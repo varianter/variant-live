@@ -1,0 +1,20 @@
+{
+  "name": "variant-visualisation-run-locally",
+  "version": "1.0.0",
+  "description": "Example of Variant Live to run locally",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^4.1.7",
+    "parcel-bundler": "^1.11.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.4.3",
+    "p5": "^0.7.2"
+  }
+}

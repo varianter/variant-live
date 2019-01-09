@@ -1,0 +1,52 @@
+export const Metadata = {
+  creators: ["Marius Krakeli"],
+  url: "https://www.variant.no"
+};
+
+export default function draw(p5, { bass, treble, mid, level }) {
+  p5.randomSeed(250);
+  let pieces = p5.random(0, 24);
+  let radius = p5.random(0, 600);
+
+  let mapMid = p5.map(mid, 0, 255, -radius, radius);
+  let scaleMid = p5.map(mid, 0, 255, 1, 1.9);
+
+  let mapTreble = p5.map(treble, 0, 255, -radius, radius);
+  let scaleTreble = p5.map(treble, 0, 255, 1, 1.9);
+
+  let mapBass = p5.map(bass, 0, 255, -100, 800);
+  let scaleBass = p5.map(bass, 0, 255, 0, 0.8);
+
+  p5.strokeWeight(1);
+
+  for (let i = 0; i < pieces; i += 0.1) {
+    p5.rotate(p5.TWO_PI / pieces);
+
+    /*----------  BASS  ----------*/
+    p5.push();
+    p5.strokeWeight(5);
+    p5.stroke("#6200ee");
+    p5.scale(scaleBass);
+    p5.rotate(p5.frameCount * -0.5);
+    p5.line(mapBass, radius / 2, 0, radius, radius, 0);
+    p5.line(-mapBass, -radius / 2, 0, radius, radius, 0);
+    p5.pop();
+
+    /*----------  MID  ----------*/
+    p5.push();
+    p5.strokeWeight(0.5);
+    p5.stroke("#ff0166");
+    p5.scale(scaleMid);
+    p5.line(mapMid, radius / 2, 0, radius, radius, 0);
+    p5.line(-mapMid, -radius / 2, 0, radius, radius, 0);
+    p5.pop();
+
+    /*----------  TREBLE  ----------*/
+    p5.push();
+    p5.stroke("#03dac6");
+    p5.scale(scaleTreble);
+    p5.line(mapTreble, radius / 2, radius, radius);
+    p5.line(-mapTreble, -radius / 2, radius, radius);
+    p5.pop();
+  }
+}
