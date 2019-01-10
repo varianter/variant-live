@@ -37,7 +37,9 @@ h3 {
   font-size: 1.5rem;
 }
 
-p {
+p,
+ol,
+ul {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
