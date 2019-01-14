@@ -21,6 +21,11 @@
     "type": "git",
     "url": "git+https://github.com/varianter/variant-live.git"
   },
+  "browserslist": [
+    "last 1 version",
+    "IE 11",
+    "> 1%"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
