@@ -4,7 +4,7 @@
   "description": "Example of Variant Live to run locally",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html --no-hmr"
   },
   "keywords": [],
   "author": "",
