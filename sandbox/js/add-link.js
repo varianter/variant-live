@@ -53,5 +53,5 @@ function createUrl(src) {
 }
 
 function createCopyUrl(src) {
-  return location.href + "?content=" + encodeURIComponent(src);
+  return location.href.split('?')[0] + "?content=" + encodeURIComponent(src);
 }
