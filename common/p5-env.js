@@ -67,7 +67,7 @@ export default function createEnv(
       p.background("#000");
       p.textFont(myFont);
       p.noFill();
-      fft.analyze();
+      const spectrum = fft.analyze();
 
       try {
         p.push();
@@ -78,6 +78,7 @@ export default function createEnv(
             treble: fft.getEnergy("treble"),
             mid: fft.getEnergy("mid"),
             level: analyzer.getLevel(),
+            spectrum,
             p5
           },
           setupResult
