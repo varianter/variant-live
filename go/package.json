@@ -1,0 +1,21 @@
+{
+  "name": "variant-visualisation-go",
+  "version": "1.0.0",
+  "description": "Live Variant Live. Visuals shuffeled",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "now-build": "parcel build index.html --no-source-maps --public-url /go"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cssnano": "^4.1.7",
+    "parcel-bundler": "^1.11.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.4.3",
+    "p5": "^0.7.2"
+  }
+}
