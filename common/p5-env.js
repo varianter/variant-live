@@ -11,15 +11,24 @@ export default function createEnv(
 ) {
   let p5Instance = new p5(env, el);
 
-  return {
-    updateValues(opts) {
-      const {
-        render: innerRender = noop,
-        metadata: innerMetadata = {},
-      } = opts;
+  function updateValues(opts) {
+    const {
+      render: innerRender = noop,
+      metadata: innerMetadata = {},
+    } = opts;
 
-      render = innerRender;
-      metadata = innerMetadata;
+    render = innerRender;
+    metadata = innerMetadata;
+  }
+
+  return {
+    updateValues,
+    recreate(opts) {
+      updateValues(opts);
+
+      p5Instance.remove();
+
+      p5Instance = new p5(env, el);
     },
     p5Instance
   };
@@ -34,8 +43,11 @@ export default function createEnv(
     };
 
     p.setup = () => {
-      p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
-
+      if(metadata.mode === 'P2D') {
+        p.createCanvas(p.windowWidth, p.windowHeight);
+      } else {
+        p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
+      }
       fft = new p5.FFT();
       fft.setInput(source);
 

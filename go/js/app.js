@@ -19,7 +19,7 @@ const opts = {
   }
 };
 
-let { updateValues } = createP5Env(opts, metadata, document.getElementById("canvas"));
+let { recreate } = createP5Env(opts, metadata, document.getElementById("canvas"));
 let interval = setupInterval();
 
 function setupInterval() {
@@ -53,7 +53,7 @@ function onArrow(direction) {
 function nextVisual() {
   n = n >= availableVisuals.length - 1 ? 0 : n + 1;
   console.log(availableVisuals[n]);
-  updateValues({
+  recreate({
     render: visuals[availableVisuals[n]].default,
     metadata: visuals[availableVisuals[n]].Metadata
   });
@@ -62,7 +62,7 @@ function nextVisual() {
 function prevVisual() {
   n = n === 0 ? availableVisuals.length - 1 : n - 1;
   console.log(availableVisuals[n]);
-  updateValues({
+  recreate({
     render: visuals[availableVisuals[n]].default,
     metadata: visuals[availableVisuals[n]].Metadata
   });
