@@ -1,7 +1,7 @@
 import createP5Env from "../../common/p5-env";
 import visuals from "../../visuals/*.js";
 
-const timePerVisualInSec = 30;
+const timePerVisualInSec = 120;
 
 const availableVisuals = Object.keys(visuals);
 let n = 0;
