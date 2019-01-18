@@ -1,6 +1,6 @@
 import createP5Env from "../../common/p5-env";
 import song from "../../assets/music.mp3";
-import render, { metadata } from "./visualisation";
+import render, { Metadata } from "./visualisation";
 
 const opts = {
   render,
@@ -13,4 +13,4 @@ const opts = {
   }
 };
 
-createP5Env(opts, metadata, document.getElementById("canvas"));
+createP5Env(opts, Metadata, document.getElementById("canvas"));
