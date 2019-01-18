@@ -4,18 +4,11 @@ import ibmFont from "../assets/IBMPlexMono-Bold.ttf";
 
 const noop = () => {};
 
-export default function createEnv(
-  { preload = noop, setup = noop, render = noop },
-  metadata,
-  el
-) {
+export default function createEnv({ preload = noop, setup = noop, render = noop }, metadata, el) {
   let p5Instance = new p5(env, el);
 
   function updateValues(opts) {
-    const {
-      render: innerRender = noop,
-      metadata: innerMetadata = {},
-    } = opts;
+    const { render: innerRender = noop, metadata: innerMetadata = {} } = opts;
 
     render = innerRender;
     metadata = innerMetadata;
@@ -43,7 +36,7 @@ export default function createEnv(
     };
 
     p.setup = () => {
-      if(metadata.mode === 'P2D') {
+      if (metadata.mode === "P2D") {
         p.createCanvas(p.windowWidth, p.windowHeight);
       } else {
         p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
@@ -52,6 +45,7 @@ export default function createEnv(
       fft.setInput(source);
 
       analyzer = new p5.Amplitude();
+      analyzer.setInput(source);
 
       setup(p);
     };
@@ -68,17 +62,14 @@ export default function createEnv(
 
       try {
         p.push();
-        render(
-          p,
-          {
-            bass: fft.getEnergy("bass"),
-            treble: fft.getEnergy("treble"),
-            mid: fft.getEnergy("mid"),
-            level: analyzer.getLevel(),
-            spectrum,
-            p5
-          }
-        );
+        render(p, {
+          bass: fft.getEnergy("bass"),
+          treble: fft.getEnergy("treble"),
+          mid: fft.getEnergy("mid"),
+          level: analyzer.getLevel(),
+          spectrum,
+          p5
+        });
         p.pop();
 
         renderAttribution(p);
@@ -88,8 +79,7 @@ export default function createEnv(
     };
 
     function renderAttribution(p) {
-      if (!metadata || !metadata.creators || !Array.isArray(metadata.creators))
-        return;
+      if (!metadata || !metadata.creators || !Array.isArray(metadata.creators)) return;
 
       p.push();
       p.translate(-p.windowWidth / 2, p.windowHeight / 2 - 80);
