@@ -26,7 +26,7 @@ function setupInterval() {
   return setInterval(nextVisual, timePerVisualInSec * 1000);
 }
 
-document.addEventListener("keydown", function() {
+document.addEventListener("keydown", function(event) {
   if (event.defaultPrevented) {
     return;
   }
