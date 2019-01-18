@@ -10,51 +10,48 @@ export default function createEnv(
   el
 ) {
   let p5Instance = new p5(env, el);
-  let preloadHook = noop;
-  let setupHook = noop;
+
+  function updateValues(opts) {
+    const {
+      render: innerRender = noop,
+      metadata: innerMetadata = {},
+    } = opts;
+
+    render = innerRender;
+    metadata = innerMetadata;
+  }
 
   return {
-    updateValues(opts) {
-      const {
-        render: innerRender = noop,
-        metadata: innerMetadata = {},
-        preloadHook: preloadHookInner = noop,
-        setupHook: setupHookInner = noop
-      } = opts;
+    updateValues,
+    recreate(opts) {
+      updateValues(opts);
 
-      render = innerRender;
-      metadata = innerMetadata;
-      preloadHook = preloadHookInner;
-      setupHook = setupHookInner;
+      p5Instance.remove();
+
+      p5Instance = new p5(env, el);
     },
     p5Instance
   };
 
   function env(p) {
     let fft, analyzer, source, myFont;
-    let preloadResult;
-    let setupResult;
 
     p.preload = () => {
       myFont = p.loadFont(ibmFont);
 
       source = preload(p, p5);
-      preloadResult = preloadHook(p, p5);
     };
 
     p.setup = () => {
-      p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
-
+      if(metadata.mode === 'P2D') {
+        p.createCanvas(p.windowWidth, p.windowHeight);
+      } else {
+        p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
+      }
       fft = new p5.FFT();
       fft.setInput(source);
 
       analyzer = new p5.Amplitude();
-
-      setupResult = setupHook(p, preloadResult, {
-        fft,
-        analyzer,
-        p5
-      });
 
       setup(p);
     };
@@ -80,8 +77,7 @@ export default function createEnv(
             level: analyzer.getLevel(),
             spectrum,
             p5
-          },
-          setupResult
+          }
         );
         p.pop();
 
