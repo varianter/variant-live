@@ -22,8 +22,6 @@ editor(example, editorContainer, function replaceSource(
   error,
   fn,
   attribution,
-  preload,
-  setup,
   src
 ) {
   if (error) {
@@ -33,8 +31,6 @@ editor(example, editorContainer, function replaceSource(
   updateLink(src);
   updateValues({
     render: fn,
-    metadata: attribution,
-    preloadHook: preload,
-    setupHook: setup
+    metadata: attribution
   });
 });
