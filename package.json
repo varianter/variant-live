@@ -1,0 +1,25 @@
+{
+  "name": "variant-vjay",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "dependencies": {
+    "p5": "^0.7.2"
+  },
+  "devDependencies": {
+    "cssnano": "^4.1.7"
+  },
+  "scripts": {
+    "deploy": "now --team variant && now alias --team variant && now rm variant-nyttarskalas-2019 --safe --yes --team variant"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varianter/variant-live.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/varianter/variant-live/issues"
+  },
+  "homepage": "https://github.com/varianter/variant-live#readme"
+}
