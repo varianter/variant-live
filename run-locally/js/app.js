@@ -1,6 +1,6 @@
 import createP5Env from "../../common/p5-env";
 import song from "../../assets/music.mp3";
-import render, { Metadata } from "../../visuals/ex4";
+import render, { Metadata } from "../../visuals/speaker";
 import p5 from "../../common/p5";
 
 const opts = {
